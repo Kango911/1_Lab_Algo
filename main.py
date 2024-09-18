@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+from tabulate import tabulate
 from algorithms import sorting_algorithm, search_algorithm, count_unique_elements, linear_search, bubble_sort
 from time_execution import time_execution
 from data_generation import best_case_data, average_case_data, worst_case_data
@@ -84,7 +85,7 @@ for N in N_values:
                 exec_time = time_execution(alg, data.copy(), 50)  # Ищем элемент 50
                 results[alg_name][case].append(exec_time)
 
-# Вывод результатов в таблицу
+# Вывод результатов в таблицу с использованием tabulate
 table_data = {
     'Algorithm': [],
     'Case': [],
@@ -101,4 +102,6 @@ for alg_name in results:
             table_data['Time (s)'].append(time)
 
 df_results = pd.DataFrame(table_data)
-print(df_results)
+
+# Использование tabulate для красивого вывода
+print(tabulate(df_results, headers='keys', tablefmt='pretty', floatfmt=".6f"))
